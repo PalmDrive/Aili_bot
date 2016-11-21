@@ -1,0 +1,17 @@
+.sc-thread-row
+  .sc-thread-left
+    a(ui-sref="app.talk.thread({talkId:groupId, threadId: model.$id})")
+      .sc-thread-content.size-s.max-two-lines.text-black(data-ng-bind="model.topic", data-ellipsis="", data-ellipsis-symbol="...", ng-if="topicClip")
+      .sc-thread-content.size-s.text-black(ng-bind-html="model.topic", ng-if="!topicClip")
+      .sc-thread-meta-container.size-s.clearfix.text-gray
+        .meta
+          img.img-xs.img-circle(ng-src="{{model.author.headimgurl}}")
+          span {{model.author.nickname}}
+        .meta {{model.repliesCount || 0}}回复
+        //a.meta(ui-sref="app.talk({talkId:groupId})")
+          i.sprite-icon.icon-comment
+          span 回复
+
+  .sc-thread-right(on-tap="toggleLikeThread(model)")
+    div(class="sprite-icon icon-star_{{model.isLiked ? 'selected' : 'normal'}}")
+    .likes-count(ng-class="{liked:model.isLiked}") {{model.likesCount}}

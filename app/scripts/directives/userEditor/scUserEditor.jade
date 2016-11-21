@@ -1,0 +1,17 @@
+.sc-user-editor
+  form(name="userEditorForm", ng-submit="save()")
+    .form-control
+      label name
+      input(type="text", ng-model="user.attributes.nickname", name="user_name", required="")
+    .form-control
+      label intro
+      textarea.block(rows=4, ng-model="user.attributes.intro", name="user_name")
+    .form-control
+      label 头像
+      img(ng-src="{{user.attributes.headimgurl}}", ng-if="user.attributes.headimgurl", height=100)
+      .progress(ng-show="headimgurlUploading.processing")
+        .progress-bar(style="width: {{headimgurlUploading.percentage}};") {{headimgurlUploading.percentage}}
+      .dropzone#headimg-dropzone
+
+    .form-action
+      button.button.button-positive(type="submit", ng-disabled="processing || userEditorForm.$invalid") 保存

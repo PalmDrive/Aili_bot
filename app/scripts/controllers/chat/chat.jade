@@ -1,0 +1,14 @@
+ion-view.talk-view(view-title="Aili")
+  ion-nav-title Aili Bot
+  .ion-view-body
+    .content-container
+      ion-content#messages-container.has-footer(delegate-handle="messagesScroll", chat-input-id="#chat-input-view", on-scroll="onScroll()", on-scroll-complete="onScrollComplete()")
+        infinite-scroll-top(on-infinite="fetchMoreMessages()", ng-if="!messages.allFetched")
+        //.loader(ng-hide="messages")
+          ion-spinner
+        .content
+          div(style="visibility:hidden;height:1px;overflow:hidden") without me, messages won't render in Android wechat web view!
+          sc-message(model="message", ng-repeat="message in messages.data")
+
+  ion-footer-bar.bar-autoheight#chat-input-view(keyboard-attach="")
+    sc-chat-input(messages="messages", messages-container-id="#messages-container", ng-hide="isMuted")

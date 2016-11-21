@@ -1,0 +1,7 @@
+.sc-question-editor
+  .form-control
+    label 问题
+    textarea.block(rows=2, ng-model="question.attributes.content")
+  .form-control
+    label 回答
+    textarea.block(row=2, ng-model="question.attributes.replies[0].content")

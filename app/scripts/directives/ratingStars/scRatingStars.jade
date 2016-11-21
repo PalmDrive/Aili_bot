@@ -1,0 +1,5 @@
+.sc-rating-stars
+  .size-12-container(ng-if="size === '12'")
+    i.sprite-icon(ng-repeat="i in [0, 1, 2, 3, 4]", ng-class="{'icon-emptystar': roundToHalf(rating) <= i, 'icon-halfstar': roundToHalf(rating) === i + 0.5, 'icon-fullstar': roundToHalf(rating) >= i + 1}")
+  .size-10-container(ng-if="size === '10'")
+    i.sprite-icon(ng-repeat="i in [0, 1, 2, 3, 4]", ng-class="{'icon-emptystar_s': roundToHalf(rating) <= i, 'icon-halfstar_s': roundToHalf(rating) === i + 0.5, 'icon-fullstar_s': roundToHalf(rating) >= i + 1}")

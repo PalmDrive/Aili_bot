@@ -1,0 +1,66 @@
+$yw_green: #80c837;
+$yw_yellow: #eeb900;
+$yw_red: #FF7258;
+
+@mixin yw_alert_type($type, $color) {
+  .yw-alert-#{$type} .yw-alert-header:before {
+    background-color: $color;
+  }
+}
+
+@include yw_alert_type('success', $yw_green);
+@include yw_alert_type('error', $yw_red);
+@include yw_alert_type('warning', $yw_yellow);
+
+.yw-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  border-radius: 4px;
+  background-color: #404040;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.yw-alert-header {
+  background-color: rgb(10, 10, 10);
+  width: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  &:before {
+    display: block;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.yw-alert-message {
+  padding: 10px 30px 10px 55px;
+  color: white;
+}
+
+.yw-alert-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #888888;
+
+  // Overwrite default style
+  background-color: transparent;
+  appearance: none;
+  border-width: 0;
+
+  &:hover {
+    color: white;
+  }
+}

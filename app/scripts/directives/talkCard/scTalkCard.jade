@@ -1,0 +1,25 @@
+.sc-talk-card.card-shadow(ui-sref="app.talkPlayback({talkId: '{{model.id}}'})")
+  .card-banner(ng-style="cardBannerStyle")
+    .card-banner-overlay(ng-style="cardBannerOverlayStyle")
+      .talk-name 
+        .name-bar
+        .two-lines {{model.attributes.name || "讲座标题"}}
+      img.speaker-photo(src="{{model.relationships.speaker.attributes.headimgurl}}", alt="Talk Host Photo")
+      .speaker-name.text-speaker {{model.relationships.speaker.attributes.nickname || "主讲人昵称"}}
+      .speaker-tags.text-speaker
+        span(ng-repeat="tag in model.relationships.speaker.attributes.tags")
+          span {{tag}}
+          span(ng-if="!$last") ，
+  .card-footer
+    .status-container(ng-if="model.attributes.status === 0")
+      i.sprite-icon.icon-clock
+      span {{model.attributes.talkScheduledAt || 'TBD' | date : 'yy/MM/dd h:mm a'}}
+    .status-container(ng-if="model.attributes.status === 1")
+      i.sprite-icon.icon-live
+      span 进行中
+    .status-container.status-review(ng-if="model.attributes.status === 2")
+      sc-rating-stars(rating="model.attributes.rating", size="12")
+      span {{model.attributes.rating | number:1}} ({{model.attributes.reviewsCount}})
+    .views-container
+      i.sprite-icon.icon-eye
+      span {{model.attributes.viewsCount || 0}}

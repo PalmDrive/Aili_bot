@@ -1,0 +1,137 @@
+.homepage {
+	background-image: url('../../images/homepage/background.png');
+	background-size: cover;
+
+	.img-content {
+		background-image: url('../../images/homepage/big_phones.png');
+		height: 615px;
+		width: 400px;
+		float: right;
+		margin-top: 64px;
+		margin-right: 50px;
+	}
+
+	.home-slide-box {
+		height: 430px;
+		width: 242px;
+		float: right;
+		margin-right: 40px;
+		margin-top: 90px;
+		img {
+		    width: 242px;
+		    height: auto;
+		}
+	}
+
+	.text-container {
+		margin-top: 125px;
+		h1, h3, p {
+			color: #FFFFFF;
+			font-weight: 400;
+		}
+		h1 {
+			font-size: 60px;
+			margin-bottom: 15px;
+		}
+		h3 {
+			font-size: 30px;
+			margin-bottom: 40px;
+		}
+		p {
+			font-size: 22px;
+			margin-bottom: 15px;
+		}
+		img {
+			margin-top: 27px;
+		}
+		.hidden-large {
+			display: none;
+			img {
+					height: 50px;
+					width: 172px;
+				}
+		}
+		.apple-link {
+			margin-top: 30px;
+		}
+		.android-link {
+			margin-top: 18px;
+		}			
+	}
+}
+
+@media screen and (max-width: $medium_screen_width - 1px) {
+	.homepage {
+		.img-container {
+			text-align: center;
+			.img-content {
+				float: none;
+				display: inline-block;
+				margin: 0;
+			}
+		}
+		.text-container {
+			text-align: center;
+			margin: 0;
+			.hidden-large {
+				display: block;
+				width: 172px;
+				margin-left: auto;
+				margin-right: auto;
+				img {
+					margin: 0;
+				}
+			}
+			.hidden-small {
+				display: none;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $extra_small_screen_width){
+	.homepage {
+		.img-container {
+			margin-bottom: 0;
+			.img-content {
+				height: 403px;
+				width: 265px;
+				margin-top: 37px;
+				background-size: 265px auto;
+				overflow: visible;
+			}
+
+			.home-slide-box {
+				height: 285px;
+				width: 160px;
+				margin-right: 26px;
+				margin-top: 60px;
+				img {
+				    width: 160px;
+				    height: auto;
+				}
+			}
+			margin-bottom: 15px;
+		}
+		.text-container {
+			h1 {
+			font-size: 40px;
+			margin-bottom: 26px;
+			}
+			h3 {
+				font-size: 20px;
+				margin-bottom: 32px;
+			}
+			p {
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+			.hidden-large {
+				img {
+					height: 50px;
+					width: 172px;
+				}
+			}
+		}
+	}
+}

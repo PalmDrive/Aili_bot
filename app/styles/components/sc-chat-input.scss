@@ -1,0 +1,72 @@
+$sc_chat_input_container_padding_x: 10px;
+$sc_chat_input_container_padding_y: 8px;
+
+.sc-chat-input-container {
+  width: 100%;
+  background-color: $secondary_white;
+  padding: $sc_chat_input_container_padding_y $sc_chat_input_container_padding_x;
+  border-top: 1px solid $light_gray;
+  position: relative;
+
+  &.mode-1,
+  &.mode-2 {
+    .sc-chat-input-hashtag {
+      background-color: $blue;
+      border-color: $blue;
+      color: white;
+    }
+  }
+
+  .btn-send {
+    opacity: 0.85;
+    @include transition(0.5s ease opacity);
+
+    &.disabled {
+      opacity: 0.5;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+}
+
+.sc-chat-input-hashtag-container {
+  position: absolute;
+  top: $sc_chat_input_container_padding_y + 3px;
+  left: $sc_chat_input_container_padding_x;
+  padding: 0 10px 10px 0;
+}
+
+.sc-chat-input-hashtag {
+  border: 1px solid $light_gray;
+  padding: 2.5px 7px;
+  border-radius: 50%;
+  line-height: 100%;
+}
+
+.sc-chat-text-input-container {
+  padding: 0 40px 0 0;
+
+  textarea {
+    width: 100%;
+    background-color: $secondary_white;
+    max-height: 105px;
+    @include transition(height 0.5s ease);
+    overflow: auto !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .mode {
+    padding-top: 7px;
+  }
+}
+
+.sc-chat-input-action-container {
+  position: absolute;
+  top: $sc_chat_input_container_padding_y;
+  right: $sc_chat_input_container_padding_x;
+}
+
+

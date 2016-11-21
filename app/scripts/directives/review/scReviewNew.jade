@@ -1,0 +1,20 @@
+ion-modal-view.sc-review-modal.sc-review-new
+  form(name="form", novalidate="")
+    ion-header-bar.bar-light
+      .buttons
+        a.size-s(on-tap="modalDelegate.hide()") 取消
+      h1.title 请为讲座留下评价
+      .buttons
+        a.size-s(on-tap="submit()") 完成
+    ion-content.text-gray.size-s
+      .rating
+        div(ng-show="form.$submitted")
+          .error(ng-if="form.rating.$error.required") 请点击星星给讲座打一个分吧
+        input(type="number", ng-model="review.rating", name="rating", required="")
+        .stars
+          icon.size-m.star.ion-ios-star(ng-repeat="star in stars", ng-class="{solid:star.solid}", on-tap="toggleStar(star, $index)")
+        .size-xs 请点击星星来打分
+      .comment
+        div(ng-show="form.$submitted")
+          .error(ng-if="form.content.$error.required") 请用文字给讲座评价一下吧
+        textarea.size-s(placeholder="请简单评价此次讲座", name="content", rows="10", ng-model="review.content", required="")

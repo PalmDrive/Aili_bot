@@ -1,0 +1,6 @@
+.voice-message-placeholder(on-tap="togglePlay()")
+  i(class="sprite-icon icon-voice_{{frameIndex}}")
+  span.size-s.text-gray(ng-show="loaded && voiceLength !== '0:01'") {{voiceLength}}
+  ion-spinner.ion-spinner(ng-hide="loaded")
+.red-dot(ng-hide="model.isHeard")
+audio(controls="", ng-src="{{voiceData}}", data-tap-disabled="true")

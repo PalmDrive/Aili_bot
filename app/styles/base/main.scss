@@ -1,0 +1,305 @@
+textarea {
+  resize: none;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bar-autoheight {
+  height: auto;
+  padding: 0;
+}
+
+.loader {
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+
+  &.float {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+infinite-scroll-top {
+  .loader {
+    padding: 0;
+  }
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
+}
+
+.inline-block,
+input.inline-block {
+  display: inline-block;
+}
+
+.one-line-clip {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown {
+  position: absolute;
+  right: -20px;
+  top: 38px + 10px;
+  width: 135px;
+  border-radius: 3px;
+  @include bubble($direction:top, $color: $blue, $top: -7px, $left: auto, $right: 32px, $size: 7px);
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+
+  li {
+    padding: 10px;
+    background-color: $blue;
+    border-bottom: 1px solid $blue_heavy;
+
+    &:last-child {
+      border-bottom-width: 0;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    &:active {
+      background-color: $blue_heavy;
+    }
+
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+  }
+}
+
+.close {
+  @include remove_btn_default_style();
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #333;
+  z-index: 100;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/**
+ * TEXT
+ */
+
+.text-gray {
+  color: $gray;
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-black {
+  color: $black;
+}
+
+/**
+ * IMAGES
+ */
+
+.img-thumbnail {
+  width: 35px;
+  height: 35px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+.img-xs {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+/**
+ * LIST
+ */
+.item.item-plain {
+  padding-left: 0;
+  padding-right: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  background-color: transparent;
+}
+
+/**
+ * ERRORS
+ */
+
+.error {
+  color: red;
+}
+
+/**
+ * HEADER BAR
+ */
+
+.nav-bar-container {
+  .icon-button {
+    position: relative;
+
+    [class*='sprite-'] {
+      @include vertical_align_middle(relative);
+    }
+  }
+
+  .icon-button-inner {
+    position: relative;
+    padding: 0 10px;
+    height: 34px; // hacky
+  }
+}
+
+/**
+ * CONTAINER
+ */
+.container {
+  padding: 20px;
+}
+
+.overflow-scroll {
+  overflow-y: scroll;
+}
+
+/**
+ * NAV
+ */
+.nav {
+  border-bottom: 1px solid #ddd;
+
+  &:after,
+  &:before {
+    display: table;
+    content: " ";
+    clear: both;
+  }
+
+  & > li {
+    position: relative;
+    display: block;
+
+    & > a {
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      cursor: pointer;
+
+      &:hover, &:focus {
+        border-color: #eee #eee #ddd;
+        background-color: #eee;
+      }
+    }
+  }
+
+  &.nav-tabs > li {
+    float: left;
+    margin-bottom: -2px;
+
+    & > a {
+      margin-right: 2px;
+      line-height: 1.43;
+      border-radius: 4px 4px 0 0;
+    }
+
+    &.active {
+      & > a, & > a:hover, & > a:focus {
+        color: $dark_gray;
+        cursor: default;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}
+
+/**
+ * COLORS
+ */
+.bar.bar-positive {
+  background-color: $blue;
+  background-image: none;
+}
+
+/**
+ * LABEL
+ */
+.label {
+  background-color: $dark_gray;
+  color: white;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 3px;
+  margin: 0 5px;
+  font-size: 80%;
+}
+
+/**
+ * COLORS
+ */
+.bar.bar-positive {
+  background-color: $blue;
+  background-image: none;
+}
+
+/**
+ * PROGRESS
+ */
+.progress {
+  height: 20px;
+  background-color: $gray;
+  margin-bottom: 20px;
+
+  .progress-bar {
+    text-align: center;
+    color: white;
+    background-color: $blue;
+    white-space: nowrap;
+    overflow: visible;
+  }
+}
+
+/**
+ * UI Grid font family overwrite
+ */
+@font-face {
+  font-family: 'ui-grid';
+  src: url('/fonts/ui-grid.eot');
+  src: url('/fonts/ui-grid.eot#iefix') format('embedded-opentype'), url('/fonts/ui-grid.woff') format('woff'), url('/fonts/ui-grid.ttf') format('truetype'), url('/fonts/ui-grid.svg?#ui-grid') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

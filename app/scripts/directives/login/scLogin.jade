@@ -1,0 +1,9 @@
+form.form-login(name="loginForm", ng-submit="submit()")
+  .bar.bar-header
+    .title Login
+  .has-header.content
+    .list
+      label.item.item-input
+        input(type="text", placeholder="code", ng-model="user.code", required="")
+    .padding
+      button.button.button-positive.button-block(type="submit", ng-disabled="processing || loginForm.$invalid") submit

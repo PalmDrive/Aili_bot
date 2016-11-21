@@ -1,0 +1,16 @@
+.form-control {
+  margin-bottom: 20px;
+}
+
+input.bordered,
+textarea.bordered {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+input.block,
+textarea.block {
+  display: block;
+  width: 100%;
+}

@@ -1,0 +1,43 @@
+@import "bourbon";
+@import "yw-alert";
+@import "animate";
+
+/************************************
+ *
+ *  Main Styles to compile. Here only @imports!
+ *
+ ************************************/
+
+@import "_variables";
+@import "_fonts";
+@import "_sprite";
+@import "_mixins";
+
+/**
+ * BASE STYLE
+ */
+
+@import "base/main";
+@import "base/icons";
+@import "base/buttons";
+@import "base/form";
+
+
+/**
+ * MENU
+ */
+
+@import "menu/menu";
+
+/**
+ * VIEWS
+ */
+@import "views/home";
+
+
+/**
+ * COMPONENTS
+ */
+@import "components/sc-chat-input";
+@import "components/sc-message";
+

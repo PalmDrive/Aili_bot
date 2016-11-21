@@ -1,0 +1,181 @@
+.sc-talk-editor
+  form(name="talkEditorForm", ng-submit="save()", novalidate="true")
+    .row
+      .col.col-67.form-left.form-col
+        .col-inner.card
+          .basics
+            h3.positive 基本信息
+            .form-control
+              label 讲座标题
+              input.row(type="text", name="name", ng-model="talk.attributes.name", required="")
+            .form-control
+              label 讲座简介
+              textarea.block(rows=3, name="description", ng-model="talk.attributes.description")
+            .form-control
+              label 讲座类别（请在以下7个类别中选择至少1个类别，请不要选择与讲座不相关的类别。“申请方法论”，“英语考试”，“背景提升”，“励志心理”，“专业揭秘”，“申请经验”，“职业发展”）
+              tags-input(ng-model="talk.attributes.categories", add-from-autocomplete-only="true")
+                auto-complete(source="tagsSource($query)", debounce-delay=500, min-length=1)
+            .form-control(ng-if="mode === 0")
+              label Subcategories
+              tags-input(ng-model="talk.attributes.subCategories", min-length=1, allowed-tags-pattern="^[^\\.#\\$\\[\\]\\/]*$", on-invalid-tag="onInvalidTag()")
+            .form-control(ng-if="mode === 0")
+              label 讲座系列名称（最多一个）
+              input(type="text", name="seriesName", ng-model="talk.attributes.seriesName", placeholder="GRE单词7天训练营", size="30")
+            .form-control(ng-if="mode === 0")
+              label Tags
+              tags-input(ng-model="talk.attributes.tags", min-length=1, required="", allowed-tags-pattern="^[^\\.#\\$\\[\\]\\/]*$", on-invalid-tag="onInvalidTag()")
+            .form-control
+              label Speaker Tags
+              tags-input(ng-model="talk.attributes.speakerTags", min-length=1, required="", allowed-tags-pattern="^[^\\.#\\$\\[\\]\\/]*$", on-invalid-tag="onInvalidTag()")
+            //- .form-control
+            //-   div 类型
+            //-   label.inline
+            //-     input(type="radio", name="talk_type", ng-model="talk.attributes.talkType", value=0)
+            //-     span 整个讲座
+            //-   //- label.inline
+            //-   //-   input(type="radio", name="talk_type", ng-model="talk.attributes.talkType", value=1)
+            //-   //-   span 讲座片段
+            //-   //- label.inline
+            //-   //-   input(type="radio", name="talk_type", ng-model="talk.attributes.talkType", value=2)
+            //-   //-   span 抽象整个讲座
+            //-   label.inline
+            //-     input(type="radio", name="talk_type", ng-model="talk.attributes.talkType", value=3)
+            //-     span 抽象讲座片段
+            div(ng-if="talk.attributes.talkType === 3")
+              //- .form-control
+              //-   label 母讲座标题
+              //-   input.ion-autocomplete(type="text", name="talk_parent_talk_id", ng-model="_parentTalkId", ng-model-options="{updateOn: 'default blur', debounce: {default: 1000, blur: 0}}", ion-autocomplete="", readonly="readonly", autocomplete="off", max-selected-items="1", items-method="fetchTalks(query)", item-value-key="value", item-view-value-key="label", external-model="talkExternalModel" model-to-item-method="talkModelToItemMethod(modelValue)")
+              .form-control
+                label 片段顺序(从0开始)
+                input(type="number", name="talk_clip_order", ng-model="talk.attributes.clipOrder", min=0, step=1)
+              .form-control
+                label 开始于(在母讲座的时间轴上)，毫秒
+                input(type="number", name="talk_started_at", ng-model="talk.attributes.talkStartedAt", min=0, step=1000)
+
+            div(ng-if="isEntireTalk")
+              //- Only available to admin
+              div
+                .form-control
+                  label 主讲人
+                  input.ion-autocomplete(type="text", name="talk_speaker_id", ng-model="talk.attributes.SpeakerId", ng-model-options="{updateOn: 'default blur', debounce: {default: 1000, blur: 0}}", ion-autocomplete="", readonly="readonly", autocomplete="off", max-selected-items="1", items-method="fetchUsers(query)", item-value-key="value", item-view-value-key="label", external-model="userExternalModel", model-to-item-method="userModelToItemMethod(modelValue)", ng-disabled="mode !== 0")
+                  a(href="", ng-click="showUserEditorModal()", ng-show="mode === 0") 添加用户
+                .form-control(ng-show="mode === 0")
+                  label 评分
+                  input(type="number", name="rating", ng-model="talk.attributes.rating", min=0, step=0.5, max=5)
+                .form-control(ng-show="mode === 0")
+                  label 评分数量
+                  input(type="number", name="reviews_count", ng-model="talk.attributes.reviewsCount", min=0, step=1)
+                .form-control(ng-show="mode === 0")
+                  label 浏览数量
+                  input(type="number", name="views_count", ng-model="talk.attributes.viewsCount", min=0, step=1)
+              .form-control
+                label 进入讲座权限
+                select(ng-model="talk.attributes.permission", ng-options="option.value as option.label for option in permissionOptions")
+              .form-control
+                label 设置密码
+                input(type="text", name="code", ng-model="talk.attributes.code", pattern="[0-9]{6,6}" )
+              .form-control
+                label 分享预填内容
+                textarea.block(name="share_content", ng-model="talk.attributes.shareInfo.content", rows=2)
+              .form-control
+                label 讲座开始前分享到微信的链接
+                textarea.block(rows=1, name="share_link", ng-model="talk.attributes.shareInfo.link", placeholder="http://www.palmdrive.cn")
+              .form-control
+                label 讲座状态
+                select(ng-model="talk.attributes.status", ng-options="status.value as status.label for status in statusOptions", ng-disabled="mode !== 0")
+              .form-control
+                label 计划开讲时间
+                input(type="datetime-local", name="scheduled_at", ng-model="talk.attributes.talkScheduledAt")
+              .form-control(ng-show="mode === 0")
+                label 讲座结束于
+                input(type="datetime-local", name="ended_at", ng-model="talk.attributes.talkEndedAt")
+
+            .form-control
+              label 时长(秒)
+              input(type="number", name="length", ng-model="talk.attributes.talkLength", min=0, step=1, required="")
+            .form-control(ng-show="mode === 0")
+              label 讲座类型
+              select(ng-model="talk.attributes.talkType", name="talk_type", ng-options="op.value as op.label for op in talkTypeOptions")
+            .form-control(ng-show="mode === 0")
+              label 是否显示该讲座在‘发现’列表里
+              select(ng-model="talk.attributes.priority", name="talk_priority", ng-options="op.value as op.label for op in priorityOptions")
+
+            .form-control(ng-show="mode === 0")
+              .audio(ng-if="has.slides")
+                p 上传录音文件
+                div(ng-show="talk.attributes.audioSrc")
+                  a(ui-sref="app.talkPlayback({talkId: talk.id})", target="_blank")
+                    span.ion-document
+                    span &nbsp;录音文件已上传
+                .progress(ng-show="audioUploading.processing")
+                  .progress-bar(style="width: {{audioUploading.percentage}};") {{audioUploading.percentage}}
+                .dropzone#audio-dropzone
+
+            .form-control
+              .cover-img(ng-if="has.slides")
+                p 上传讲座配图
+                div(ng-show="talk.attributes.coverImgSrc")
+                  img(ng-src="{{talk.attributes.coverImgSrc}}", height=50)
+                .progress(ng-show="coverImgUploading.processing")
+                  .progress-bar(style="width: {{coverImgUploading.percentage}};") {{coverImgUploading.percentage}}
+                .dropzone#cover-img-dropzone
+
+            .form-control
+              .cover-img(ng-if="has.slides")
+                p 上传微信分享照片（尺寸要求：120x120像素，大小10k左右）
+                div(ng-show="talk.attributes.thumbnailSrc")
+                  img(ng-src="{{talk.attributes.thumbnailSrc}}", height=50)
+                .progress(ng-show="thumbnailUploading.processing")
+                  .progress-bar(style="width: {{thumbnailUploading.percentage}};") {{thumbnailUploading.percentage}}
+                .dropzone#thumbnail-dropzone
+
+            .form-control
+              .materials-container(ng-if="has.slides")
+                p 上传讲座相关资料（支持PDF，Word，Excel，JPEG，PNG，请不要上传其他格式的文件，慎重上传Excel文件）
+                ul
+                  li.material(ng-repeat="material in talk.talkMaterials")
+                    sc-talk-material-editor(ng-model="material", sc-talk="scTalk")
+                .progress(ng-show="talkMaterialUploading.processing")
+                  .progress-bar(style="width: {{talkMaterialUploading.percentage}};") {{talkMaterialUploading.percentage}}
+                .dropzone#talk-material-dropzone
+
+          .clips(ng-if="isEntireTalk && talk.id && has.talkClips")
+            h3.positive 讲座片段
+            a(ng-click="showingNewTalkModal()", href="") 添加讲座片段
+            .grid(ui-grid="clipsGridOptions")
+
+          div(ng-show="has.questions")
+            h3.positive 问答记录
+            div
+              ion-spinner(ng-if="!talk.questions")
+            ul.list.questions(ng-if="talk.questions")
+              li.question.item.item-plain(ng-repeat="question in talk.questions")
+                button.close(type="button", ng-click="deleteQuestion(question)", title="删除") x
+                sc-question-editor(ng-model="question")
+            button.button.button-positive(type="button", ng-click="newQuestion()") 添加问题
+
+      .col.col-33.form-right.form-col(ng-if="has.slides")
+        .col-inner.card
+          h3.positive 讲座幻灯片
+          div 每次最多上传20张（只支持图片格式，不支持PDF）
+          ul.list.slides(ui-sortable="sortableOptions", ng-model="talk.slides")
+            li.item.item-plain.slide-container(ng-repeat="slide in talk.slides")
+              button.close(type="button", ng-click="deleteSlide(slide)", title="删除") x
+              sc-slide-editor(ng-model="slide", mode="{{mode}}", order="$index")
+          div(ng-show="talk.attributes.SpeakerId")
+            .dropzone#slides-dropzone
+          div.energized(ng-hide="talk.attributes.SpeakerId") 设置主讲人后才可上传PPT
+
+    .form-action
+      button.button.button-positive(type="submit", ng-disabled="processing || talkEditorForm.$invalid") 保存
+
+    #img-uploading-spinner(style="display:none")
+      .dz-preview.loader
+        div 正在上传
+        ion-spinner
+
+  .new-talk-modal.overlay-modal(ng-show="showNewTalkModal")
+    button.close(type="button", ng-click="showNewTalkModal = false") x
+    .bar.bar-header
+      .title 创建片段
+    ion-content.has-header#new-talk-modal-content(overflow-scroll="true")

@@ -1,0 +1,45 @@
+.sc-message-view(ng-switch="model.attributes.type", id="message-{{model.id}}")
+  .user-msg(ng-switch-default)
+    .sc-message-container.clearfix(ng-class="{mine:model.attributes.senderId === currentUser.id}")
+      .sc-message-left
+        img.user-photo.img-thumbnail(ng-src="{{model.relationships.user.data.attributes.headimgurl}}", title="user photo")
+      .sc-message-right.size-s
+        //-.user-name.text-gray
+          span {{model.user.attributes.nickname}}
+          i.sprite-icon.icon-host_badge.right(ng-if="model.user.attributes.status === 0")
+
+          //- for testing
+            span {{model.createdAt | date: 'short'}}
+
+        //- @tood: escape html
+        div(ng-switch="model.attributes.type")
+          div(ng-switch-when=0) {{model.attributes.content}}
+
+          .media-container(ng-switch-when=1)
+            p
+              a(href="{{trustedResourceUrl(model.relationships.media.data.attributes.link)}}") {{model.relationships.media.data.attributes.title}}
+            p 摘要: {{model.relationships.media.data.attributes.summary}}
+            div
+              span {{model.relationships.media.data.attributes.source}} &nbsp;&nbsp;
+              span {{model.relationships.media.data.attributes.meta}}
+
+          .media-container(ng-switch-when=2)
+            p {{model.relationships.media.data.attributes.title}}
+            audio(ng-src="{{trustedResourceUrl(model.relationships.media.data.attributes.mediaSrc)}}", controls="true", style="width:100%")
+            p 摘要: {{model.relationships.media.data.attributes.summary}}
+            div
+              span {{model.relationships.media.data.attributes.source}} &nbsp;&nbsp;
+              span {{model.relationships.media.data.attributes.meta}}
+
+          .media-container(ng-switch-when=3)
+            p {{model.relationships.media.data.attributes.title}}
+            iframe(ng-src="{{trustedResourceUrl(model.relationships.media.data.attributes.mediaSrc)}}", controls="true", allowfullscreen="true", frameborder=0, style="width:100%")
+            p 摘要: {{model.relationships.media.data.attributes.summary}}
+            div
+              span {{model.relationships.media.data.attributes.source}} &nbsp;&nbsp;
+              span {{model.relationships.media.data.attributes.meta}}
+
+          //- sc-voice.sc-voice(ng-switch-when=1, model="model")
+
+  .system-msg.text-gray.size-xs(ng-switch-when=6)
+    span.text {{model.attributes.content}}

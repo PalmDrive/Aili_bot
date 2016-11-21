@@ -1,0 +1,9 @@
+div
+  p
+    a(ui-sref="admin.talk({talkId: talk.id})") {{talk.attributes.name}}
+  p(ng-hide="talk.attributes.bannerImgSrc") 还没有上传banner图片
+  img(ng-if="talk.attributes.bannerImgSrc", ng-src="{{talk.attributes.bannerImgSrc}}", height=100)
+
+  .progress(ng-show="bannerImgUploading.processing")
+    .progress-bar(style="width: {{bannerImgUploading.percentage}};") {{bannerImgUploading.percentage}}
+  .dropzone(id="banner-img-dropzone-{{talk.id}}")

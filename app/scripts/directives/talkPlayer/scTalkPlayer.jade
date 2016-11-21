@@ -1,0 +1,14 @@
+.sc-talk-player
+  .slides-list(sc-background-container="", data-ratio="0.75")
+    ion-spinner.spinner(ng-show="waiting")
+    .slide(ng-show="currentSlide && currentSlide === slide.content", ng-repeat="slide in slides")
+      .img(style="background-image: url({{slide.content.attributes.getAttachmentUrls.medium}})", ng-if="slide.content.attributes.getAttachmentUrls")
+      .question(ng-if="!slide.content.attributes.getAttachmentUrls")
+        p.text-gray 提问:
+        p {{slide.content.attributes.topic}}
+
+    .default-slide.gray(ng-hide="currentSlide")
+      .title.size-m {{talk.attributes.name}}
+      .subtitle {{talk.relationships.speaker.attributes.nickname}}
+
+  audio#player(src="{{trustedAudioSrc(talk.attributes.audioSrc)}}")

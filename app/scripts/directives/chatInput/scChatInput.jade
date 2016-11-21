@@ -1,0 +1,8 @@
+.sc-chat-input-container.clearfix(class="mode-{{mode}}")
+  //- .sc-chat-input-hashtag-container(on-tap="changeMode()")
+  //-   .sc-chat-input-hashtag.size-m.text-gray #
+  .sc-chat-text-input-container
+    textarea.size-s#chat-text-input(ng-model="message.attributes.content", name="chat-text-input", msd-elastic="\n", rows=1, placeholder="输入......")
+  .sc-chat-input-action-container
+    .btn-send(on-tap="sendMessage($event)", ng-class="{disabled:!message.attributes.content.length||sendingMessage}")
+      .icon-send.sprite-icon

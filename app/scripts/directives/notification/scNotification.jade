@@ -1,0 +1,15 @@
+.sc-notification(ng-click="gotoEditMode()", ng-class="mode === 1 ? 'edit' : 'read'")
+  a.edit-button(title="编辑")
+    i.ion-compose
+  div(ng-show="mode === 0")
+    span {{model.attributes.content}}
+    span.item-note 推送时间(本地): {{model.attributes.scheduledAt | date: 'MM/dd h:mm a'}}
+  form(ng-show="mode === 1", novalidate)
+    //- input.inline-block(type="text", ng-model="model.attributes.content", name="notification[content]")
+    span {{model.attributes.content}}
+    span.item-note
+      span 推送时间:
+      input.inline-block(type="datetime-local", name="notifiaction[scheduled_at]", ng-model="model.attributes.scheduledAt")
+    .button-bar
+      a.button(ng-click="update($event)") 保存
+      a.button(ng-click="gotoReadMode($event)") 取消

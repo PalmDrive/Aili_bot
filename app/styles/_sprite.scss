@@ -1,0 +1,72 @@
+$halfstar_s: -0px -0px 15px 14px;
+$emptystar_s: -0px -14px 15px 14px;
+$fullstar_s: -0px -28px 15px 14px;
+$emptystar: -0px -42px 16px 15px;
+$fullstar: -0px -57px 16px 15px;
+$halfstar: -0px -72px 16px 15px;
+$eye: -0px -87px 20px 15px;
+$clock: -0px -102px 15px 15px;
+$live: -0px -117px 17px 15px;
+$close: -0px -132px 18px 18px;
+$comment: -0px -150px 19px 19px;
+$star_selected: -0px -169px 22px 22px;
+$star_normal: -0px -191px 22px 22px;
+$play: -0px -213px 22px 22px;
+$host_badge: -0px -235px 22px 22px;
+$pause: -0px -257px 22px 22px;
+$voice_2: -0px -279px 24px 24px;
+$voice_3: -0px -303px 24px 24px;
+$voice_1: -0px -327px 24px 24px;
+$hashtag: -0px -351px 20px 26px;
+$filter: -0px -377px 29px 26px;
+$gear: -0px -403px 34px 34px;
+$sclogo: -0px -437px 39px 39px;
+$send: -0px -476px 39px 39px;
+$bookmark: -0px -515px 52px 52px;
+$favor_box: -0px -567px 52px 52px;
+$ask_more: -0px -619px 54px 54px;
+$play2: -0px -673px 54px 54px;
+$restart: -0px -727px 54px 54px;
+$android: -0px -781px 54px 54px;
+$pause2: -0px -835px 54px 54px;
+$apple: -0px -889px 54px 54px;
+$pdf: -0px -943px 64px 64px;
+$others: -0px -1007px 64px 64px;
+$image: -0px -1071px 64px 64px;
+$excel: -0px -1135px 64px 64px;
+$word: -0px -1199px 64px 64px;
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 3);
+}
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 4);
+}
+@function sprite-width($sprite) {
+  @return nth($sprite, 3);
+}
+@function sprite-height($sprite) {
+  @return nth($sprite, 4);
+}
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 1);
+  $sprite-offset-y: nth($sprite, 2);
+  background-position: $sprite-offset-x $sprite-offset-y;
+}
+@mixin sprite($sprite, $display: block) {
+  @include sprite-position($sprite);
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: $display;
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+.sprite-icon {
+  background-image: url(images/sprite.png);
+}
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 150dpi) {
+  .sprite-icon {
+    background-image: url(images/sprite@2x.png);
+    background-size: 64px 1263px;
+  }
+}

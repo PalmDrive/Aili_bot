@@ -1,0 +1,172 @@
+/**
+ * ICONS
+ */
+
+// not sure why the cssPath doesn't work properly in css-sprite
+.sprite-icon {
+  background-image: url('/images/sprite.png');
+  vertical-align: middle;
+  @include transition(opacity 0.5s ease);
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: none;
+  }
+}
+
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .sprite-icon {
+    background-image: url('/images/sprite@2x.png');
+  }
+}
+
+i.sprite-icon {
+  display: inline-block;
+  margin-right: 3px;
+
+  &.right {
+    margin-right: 0;
+    margin-left: 3px;
+  }
+}
+
+.icon-gear {
+  @include sprite($gear);
+}
+
+.icon-send {
+  @include sprite($send);
+  cursor: pointer;
+}
+
+.icon-hashtag {
+  @include sprite($hashtag);
+}
+
+.icon-comment {
+  @include sprite($comment);
+}
+
+.icon-star_normal {
+  @include sprite($star_normal);
+}
+
+.icon-star_selected {
+  @include sprite($star_selected);
+}
+
+.icon-host_badge {
+  @include sprite($host_badge);
+}
+
+.icon-voice_1 {
+  @include sprite($voice_1);
+}
+
+.icon-voice_2 {
+  @include sprite($voice_2);
+}
+
+.icon-voice_3 {
+  @include sprite($voice_3);
+}
+
+.icon-filter {
+  @include sprite($filter);
+}
+
+.icon-apple {
+  @include sprite($apple);
+}
+
+.icon-android {
+  @include sprite($android);
+}
+
+.icon-bookmark {
+  @include sprite($bookmark);
+}
+
+.icon-ask_more {
+  @include sprite($ask_more);
+}
+
+.icon-restart {
+  @include sprite($restart);
+}
+
+.icon-play2 {
+  @include sprite($play2);
+}
+
+.icon-pause2 {
+  @include sprite($pause2);
+}
+
+.icon-clock {
+  @include sprite($clock);
+}
+
+.icon-live {
+  @include sprite($live);
+}
+
+.icon-eye {
+  @include sprite($eye);
+}
+
+.icon-fullstar {
+  @include sprite($fullstar);
+}
+
+.icon-fullstar_s {
+  @include sprite($fullstar_s);
+}
+
+.icon-halfstar {
+  @include sprite($halfstar);
+}
+
+.icon-halfstar_s {
+  @include sprite($halfstar_s);
+}
+
+.icon-emptystar {
+  @include sprite($emptystar);
+}
+
+.icon-emptystar_s {
+  @include sprite($emptystar_s);
+}
+
+.icon-sclogo {
+  @include sprite($sclogo);
+}
+
+.icon-excel {
+  @include sprite($excel);
+}
+
+.icon-word {
+  @include sprite($word);
+}
+
+.icon-pdf {
+  @include sprite($pdf);
+}
+
+.icon-others {
+  @include sprite($others);
+}
+
+.icon-image {
+  @include sprite($image);
+}
+
+.icon-close {
+  @include sprite($close);
+}
+
+.icon-favor_box {
+  @include sprite($favor_box);
+}

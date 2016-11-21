@@ -1,0 +1,99 @@
+.sc-message-container {
+  padding: 14px;
+  position: relative;
+
+  &.mine {
+    &:before {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: $blue;
+    }
+  }
+
+  .user-name {
+    margin-bottom: 3px;
+
+    span {
+      margin-right: 3px;
+    }
+  }
+
+  .red-dot {
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    background-color: red;
+    border-radius: 50%;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+
+  .media-container {
+    border-radius: 3px;
+    border: $light_gray 1px solid;
+    border-left: $blue 4px solid;
+    padding: 10px;
+  }
+}
+
+.sc-message-right {
+  margin-left: 35px + 10px;
+}
+
+.sc-message-left {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+}
+
+.voice-message-placeholder {
+  margin-top: 2px;
+  width: 100px;
+  height: 35px;
+  border-radius: 3px;
+  background-color: white;
+  border: 1px solid $light_gray;
+  padding: 5px;
+  display: inline-block;
+}
+
+.sc-voice {
+  .ion-spinner {
+    display: inline-block;
+    vertical-align: middle;
+    @include transform(scale(0.6));
+    height: 20px;
+    margin-top: -6px;
+  }
+
+  audio {
+    display: none;
+  }
+}
+
+.system-msg {
+  text-align: center;
+  position: relative;
+  margin: 5px 15px;
+
+  &:before {
+    display: block;
+    content: "";
+    height: 0;
+    width: 100%;
+    border-top: 1px solid $light_gray;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: -1;
+  }
+
+  .text {
+    background-color: white;
+    padding: 0 5px;
+  }
+}

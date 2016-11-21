@@ -1,0 +1,11 @@
+.sc-slide-editor(ng-form="slideForm")
+  img(ng-src="{{slide.getAttachmentUrls.medium}}", height=100)
+  .form-control
+    label PPT简介
+    textarea.block(rows=2, ng-model="slide.description", name="slide_description" required="")
+    .warning(ng-if="slideForm.slide_description.$error.required") 请填写简介并确保为相应PPT的主要内容（简介会成为播放列表中的片段标题，长度最好控制在8个中文字符以内）
+  .form-control
+    label PPT编号: {{order}}
+  .form-control(ng-show="_mode === 0")
+    label PPT出现时间(秒数。若出现多次，用‘|’隔开，如'90|200')
+    input(type="text", ng-model="slide._shownAt", name="slide_shown_at", sec-to-millisec="")

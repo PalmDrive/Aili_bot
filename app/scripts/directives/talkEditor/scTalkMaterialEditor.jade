@@ -1,0 +1,13 @@
+.sc-talk-material-editor
+  .form-control
+    span(ng-show="state===0")
+      i.ion-document
+      a.file-name(href="{{model.attachmentSrc}}") {{model.attachmentFileName}}
+      a.link(ng-click="state=1") edit
+    .item.item-input-inset(ng-show="state===1")
+      label.item-input-wrapper
+        input(type="text", ng-model="model.attachmentFileName", name="material_file_name")
+      button.button.button-small.button-positive(ng-click="save($event)") 保存
+      button.button.button-small(ng-click="cancel($event)") 取消
+
+

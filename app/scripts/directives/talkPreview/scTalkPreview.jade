@@ -1,0 +1,44 @@
+.sc-talk-preview
+  .row
+    .col.col-67
+      .card.padding
+        p 主题：{{model.attributes.name}}
+        pre {{model.attributes.description}}
+        p
+          span categories:
+          span.label(ng-repeat="category in model.attributes.categories") {{category.text}}
+        p
+          span subcategories:
+          span.label(ng-repeat="subCategory in model.attributes.subCategories") {{subCategory.text}}
+        p
+          span tags:
+          span.label(ng-repeat="tag in model.attributes.tags") {{tag.text}}
+        p
+          span 主讲人:
+          span {{model.speaker.nickname}}
+        p
+          span 时长:
+          span {{formattedDuration(model.attributes.talkLength)}}
+        p
+          span 是否显示在’发现‘列表:
+          span {{isShown(model.attributes.priority)}}
+        p 讲座片段：
+        .grid(ui-grid="clipsGridOptions")
+        br
+        br
+        p 问题记录
+        ul.list
+          li.item.item-plain(ng-repeat="question in model.questions")
+            p {{question.attributes.content}}
+            p {{question.attributes.replies[0].content}}
+
+    .col.col-33
+      .card.padding
+        ul.list.slides
+          li.item.item-plain(ng-repeat="slide in model.slides | orderBy:'order'")
+            .slide(style="background-image:url({{slide.getAttachmentUrls.medium}})")
+            p {{slide.description}}
+            p
+              span 出现的时间: <br>
+              span {{formattedSlidesShownAt(slide._shownAt)}}
+

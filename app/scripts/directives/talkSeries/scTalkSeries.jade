@@ -1,0 +1,13 @@
+.sc-talk-series.card-shadow
+  .series-name
+    span {{model.seriesName}} &nbsp;
+    span ({{model.talks.length}}个讲座）
+  .series-card-container
+    .series-card-container-inner
+      .series-card(ng-repeat="talk in model.talks", ui-sref="app.talkPlayback({talkId: '{{talk.id}}'})")
+        .cover(ng-style="{'background-image': 'url({{talk.attributes.getCoverImgUrls.medium || '/images/talk/cover_placeholder.png'}})'}")
+        .talk-name
+          .three-lines {{talk.attributes.name}}
+        .views-container
+          i.sprite-icon.icon-eye
+          span {{talk.attributes.viewsCount || 0}}

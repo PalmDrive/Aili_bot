@@ -1,0 +1,60 @@
+@mixin vertical_align_middle($position) {
+  position: $position;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+/**
+ * mixin for rendering triangle bubble for direction: left, right, top, bottom;
+ */
+@mixin bubble($direction:left, $size:10px, $top:10px, $right:auto, $bottom:auto, $left:-10px, $color:white, $border-color:'', $border-width:1px) {
+  @if $border-color != '' {
+    // Render the bubble border
+    &:before {
+      @include bubble_base($direction, $size, $top, $right, $bottom, $left, $border-color);
+    }
+
+    @if $direction == left {
+      $left: $left + $border-width;
+    } @else if $direction == right {
+      $right: $right + $border-width;
+    } @else if $direction == top {
+      $top: $top + $border-width;
+    } @else if $direction == bottom {
+      $bottom: $bottom + $border-width;
+    }
+  }
+
+  &:after {
+    @include bubble_base($direction, $size, $top, $right, $bottom, $left, $color);
+  }
+}
+
+@mixin bubble_base($direction: left, $size: 10px, $top: 10px, $right: auto, $bottom: auto, $left: -10px, $color: white) {
+  $opposite: nth((top,right,bottom,left), index((bottom,left,top,right), $direction));
+
+  border: solid $size transparent;
+  border-#{$direction}: none;
+  border-#{$opposite}: solid $size $color;
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: $left;
+  right: $right;
+  top: $top;
+  bottom: $bottom;
+}
+
+@mixin remove_btn_default_style {
+  border-width: 0;
+  background-color: transparent;
+  appearance: none;
+}
+
+@mixin mq($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}

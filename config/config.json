@@ -1,0 +1,51 @@
+{
+  "production": {
+    "apiEndpoint": {
+      "host": "http://ailibot-service.xiaobandengapp.com",
+      "path": "/api",
+      "V2path": "/api/v2"
+    },
+    "firebaseApp": "smartchat-production",
+    "env": "production",
+    "oss": {
+      "bucket": "xiaobandeng-production"
+    },
+    "leanCloud": {
+      "appId": "1jvJOjcK9lLg66oYNWaNO6S5-gzGzoHsz",
+      "appKey": "uM2u25jiNH6Le3CKTB9asrNI"
+    }
+  },
+  "staging": {
+    "apiEndpoint": {
+      "host": "http://xiaobandeng-service-staging.palmdrive.cn",
+      "path": "/api",
+      "V2path": "/api/v2"
+    },
+    "firebaseApp": "blazing-heat-9088",
+    "env": "staging",
+    "oss": {
+      "bucket": "xiaobandeng-staging"
+    },
+    "leanCloud": {
+      "appId": "hwB46P8KvcGH258ka0JfnMww-gzGzoHsz",
+      "appKey": "ywhqmYxpFKTyemJrFl8YYT2j"
+    }
+  },
+  "development": {
+    "apiEndpoint": {
+      "host": "http://localhost",
+      "port": 5000,
+      "path": "/api",
+      "V2path": "/api/v2"
+    },
+    "firebaseApp": "dazzling-inferno-5729",
+    "env": "development",
+    "oss": {
+      "bucket": "xiaobandeng-dev"
+    },
+    "leanCloud": {
+      "appId": "1jvJOjcK9lLg66oYNWaNO6S5-gzGzoHsz",
+      "appKey": "uM2u25jiNH6Le3CKTB9asrNI"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[
+  "bower_components/jquery/dist/jquery.js",
+  "bower_components/jwt-decode/build/jwt-decode.min.js",
+  "bower_components/ionic/release/js/ionic.bundle.min.js",
+  "bower_components/underscore/underscore.js",
+  "bower_components/angular-websocket/dist/angular-websocket.js",
+  "bower_components/restangular/dist/restangular.js",
+  "bower_components/angular-elastic/elastic.js",
+  "bower_components/angular-ellipsis/src/angular-ellipsis.js",
+  "bower_components/leancloud-storage/dist/av.js"
+]
