@@ -26,7 +26,7 @@ angular.module('AiliBot')
     $scope.messages = new MessagesCollection();
 
     // init fetch
-    $scope.messages.fetch({limit: 1})
+    $scope.messages.fetch({limit: 20})
       .then(() => {
         // Wait a little bit for view rendering
         // Avoid from calling fetchMoreMessages
