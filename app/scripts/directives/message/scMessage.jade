@@ -3,6 +3,12 @@
     .sc-message-container.clearfix(ng-class="{mine:model.attributes.senderId === currentUser.id}")
       .sc-message-left
         img.user-photo.img-thumbnail(ng-src="{{model.relationships.user.data.attributes.headimgurl}}", title="user photo")
+        .inputing(ng-if="model.inputingImage === true")
+          .bubble
+            .bubble_c.bubble_c1
+            .bubble_c.bubble_c2
+            .bubble_c.bubble_c3
+        //- img.inputing-image(src="../../../images/homepage/inputing.gif" ng-if="model.inputingImage === true")
       .sc-message-right.size-s
         //-.user-name.text-gray
           span {{model.user.attributes.nickname}}
@@ -13,9 +19,9 @@
 
         //- @tood: escape html
         div(ng-switch="model.attributes.type")
-          div(ng-switch-when=0) {{model.attributes.content}}
+          div(ng-switch-when="text") {{model.attributes.content}}
 
-          .media-container(ng-switch-when=1)
+          .media-container(ng-switch-when="article")
             p
               a(href="{{trustedResourceUrl(model.relationships.media.data.attributes.link)}}") {{model.relationships.media.data.attributes.title}}
             p 摘要: {{model.relationships.media.data.attributes.summary}}
@@ -23,7 +29,7 @@
               span {{model.relationships.media.data.attributes.source}} &nbsp;&nbsp;
               span {{model.relationships.media.data.attributes.meta}}
 
-          .media-container(ng-switch-when=2)
+          .media-container(ng-switch-when="voice")
             p {{model.relationships.media.data.attributes.title}}
             audio(ng-src="{{trustedResourceUrl(model.relationships.media.data.attributes.mediaSrc)}}", controls="true", style="width:100%")
             p 摘要: {{model.relationships.media.data.attributes.summary}}
@@ -31,7 +37,7 @@
               span {{model.relationships.media.data.attributes.source}} &nbsp;&nbsp;
               span {{model.relationships.media.data.attributes.meta}}
 
-          .media-container(ng-switch-when=3)
+          .media-container(ng-switch-when="video")
             p {{model.relationships.media.data.attributes.title}}
             iframe(ng-src="{{trustedResourceUrl(model.relationships.media.data.attributes.mediaSrc)}}", controls="true", allowfullscreen="true", frameborder=0, style="width:100%")
             p 摘要: {{model.relationships.media.data.attributes.summary}}

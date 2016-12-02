@@ -19,7 +19,7 @@ angular.module('AiliBot')
         scrollPositionBottom = null;
 
     $scope.model = {
-      currentUser: Auth.currentUser
+      currentUser: Auth.getCurrentUser()
     };
     $scope.messagesLoaded = false;
 
@@ -78,6 +78,13 @@ angular.module('AiliBot')
       }, 500);
     });
 
+    $scope.$on('scMessage:addAfter', () => {
+      // 发送完数据后，恢复键盘输入视图
+      $scope.showInput = false;
+      changeFooterBarHeight(120);
+      $scope.$digest();
+    });
+
     $scope.onScroll = () => {
       // when it starts scrolling, broadcast the scroll:start event
       if (!isScrolling) {
@@ -89,4 +96,28 @@ angular.module('AiliBot')
     $scope.onScrollComplete = () => {
       isScrolling = false;
     };
+
+    $scope.preButtons = ['你好', '还发生了什么事儿你说是不', '这事儿什么背景'];
+    $scope.showInput = false;
+
+    $scope.showInputAction = () => {
+      $scope.showInput = true;
+      changeFooterBarHeight(50);
+    };
+
+    $scope.sendMessageByButton = (text) => {
+      $scope.$broadcast('sendMessageByButton', text);
+    };
+
+    $rootScope.$on('sendMessage', (event, data) => {
+      messagesScroll.scrollBottom(true);
+      changeFooterBarHeight(0);
+    });
+
+    const changeFooterBarHeight = (height) => {
+      $('ion-footer-bar').animate({
+          height: height
+        }, 250);
+    };
+
   });
