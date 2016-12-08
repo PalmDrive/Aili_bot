@@ -30,7 +30,7 @@
         const json = {
           id: null,
           attributes: {
-            type: 0,
+            type: 'text',
             content: '',
             senderId: currentUser.id,
             receiverId: 'aili_bot'
@@ -54,10 +54,11 @@
     return Message;
   };
 
-  const MessagesCollectionFactory = (Message, $http, $rootScope, API_ENDPOINT, $websocket, Auth) => {
+  const MessagesCollectionFactory = (Message, $http, $rootScope, API_ENDPOINT, $websocket, Auth, $timeout) => {
     class MessagesCollection {
       constructor() {
         const dataURL = `ws${API_ENDPOINT.url.replace('http', '')}/messages`;
+         // const dataURL = `ws${API_ENDPOINT.url.replace('http', '')}/${Auth.getCurrentUser().get('objectId')}/messages`;
 
         console.log(`dataURL: ${dataURL}`);
 
@@ -76,13 +77,23 @@
           console.log(message);
 
           const data = JSON.parse(message.data);
+          let data1 = JSON.parse(message.data);
+          data1.data.attributes.content = '';
+          data1.data.inputingImage = true;
 
           switch (data.action) {
             case 'get':
               break;
             default:
-              this.data.push(new Message(data.data));
+              this.data.push(new Message(data1.data));
               $rootScope.$broadcast('scMessage:add');
+
+              $timeout(() => {
+                this.data.pop();
+                this.data.push(new Message(data.data));
+                $rootScope.$broadcast('scMessage:add');
+                $rootScope.$broadcast('scMessage:addAfter');
+              }, 2000);
               break;
           }
         });
@@ -94,6 +105,7 @@
                 orderBy: 'createdAt'
               },
               url = `${API_ENDPOINT.url}/messages`;
+              // url = `${API_ENDPOINT.url}/${Auth.getCurrentUser().get('objectId')}/messages`;
 
         _.extend(defaultOptions, options);
 

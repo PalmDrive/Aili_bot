@@ -10,5 +10,11 @@ ion-view.talk-view(view-title="Aili")
           div(style="visibility:hidden;height:1px;overflow:hidden") without me, messages won't render in Android wechat web view!
           sc-message(model="message", ng-repeat="message in messages.data")
 
-  ion-footer-bar.bar-autoheight#chat-input-view(keyboard-attach="")
-    sc-chat-input(messages="messages", messages-container-id="#messages-container", ng-hide="isMuted")
+      ion-footer-bar(ng-show="!showInput")
+        .icon-comment.sprite-icon(ng-click="showInputAction()")
+        .pre-buttons
+          button.button.button-positive(ng-repeat="buttonText in preButtons" ng-click="sendMessageByButton(buttonText)")
+            span {{buttonText}}
+
+      ion-footer-bar.bar-autoheight#chat-input-view(keyboard-attach="" ng-show="showInput")
+        sc-chat-input(messages="messages", messages-container-id="#messages-container", ng-hide="isMuted")

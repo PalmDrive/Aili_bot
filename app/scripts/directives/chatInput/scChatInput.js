@@ -19,7 +19,7 @@
         messages: '=',
         messagesContainerId: '@'
       },
-      link: function(scope, element) {
+      link: function(scope, element, $rootScope) {
         const $textInput = $(element[0]).find('#chat-text-input'),
             $messagesContainer = $(scope.messagesContainerId),
             messagesScroll = $ionicScrollDelegate.$getByHandle($messagesContainer.attr('delegate-handle')),
@@ -66,19 +66,29 @@
         };
 
         scope.sendMessage = function(e) {
-          e.preventDefault();
-
+          if (e) {
+            e.preventDefault();
+          }
+          
           if (!scope.sendingMessage && scope.message.attributes.content.trim().length) {
             scope.sendingMessage = true;
             scope.messages.save(scope.message)
               .then(() => {
                 scope.sendingMessage = false;
+                
+                // 事件通知chatController
+                scope.$emit('sendMessage');
               });
 
             scope.message = Message.init();
             $textInput[0].focus();
           }
         };
+
+        scope.$on('sendMessageByButton', (event, data) => {
+          scope.message.attributes.content = data;
+          scope.sendMessage();
+        });
       }
     };
   };
